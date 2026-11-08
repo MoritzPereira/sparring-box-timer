@@ -2,6 +2,17 @@
 
 Alle wesentlichen Änderungen an Box-Timer. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [SemVer](https://semver.org/lang/de/).
 
+## [Unreleased]
+
+### Neu: Sparring-Rotation
+- Teilnehmer pro Preset eintragen (3–12 Namen)
+- Rundeneinteilung nach dem Round-Robin-Verfahren: jeder boxt einmal gegen jeden, bei ungerader Anzahl setzt jede Runde ein anderer aus – nie zweimal hintereinander
+- Vorbereitung und Pause zeigen groß die Paarungen der nächsten Runde, während der Runde stehen die aktuellen Paarungen unter der Uhr
+- Sprachansage der Paarungen nach der Glocke („Runde 2: Perry gegen Kai …“); läuft bei Pause zu Ende
+- Lautsprecher-Knopf oben rechts im Timer schaltet die Ansage an/aus (bleibt gespeichert)
+- Mitteilungen bei gesperrtem Handy nennen die Paarungen
+- Editor: Vorschau der ersten Runde und „Runden auf N setzen (jeder gegen jeden)“
+
 ## [1.0.0] – 2026-11-06
 
 Erste vollständige Version des MVP aus dem [Konzept](docs/KONZEPT.md), auf dem iPhone (Expo Go) getestet.
@@ -17,4 +28,5 @@ Erste vollständige Version des MVP aus dem [Konzept](docs/KONZEPT.md), auf dem 
 - Signale bei gesperrtem Handy über lokale Mitteilungen
 - Timer-Logik über vorausberechnete Zeitstempel (driftfrei)
 
+[Unreleased]: https://github.com/MoritzPereira/box-timer/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/MoritzPereira/box-timer/releases/tag/v1.0.0

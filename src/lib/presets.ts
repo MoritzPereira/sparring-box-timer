@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { rotationOf } from './rotation';
 
 export type Preset = {
   id: string;
@@ -10,6 +11,8 @@ export type Preset = {
   restSec: number;
   prepSec: number;
   warnSec: number;
+  /** Teilnehmer für die Sparring-Rotation (aktiv ab 3 Namen). */
+  fighters?: string[];
   builtIn?: boolean;
 };
 
@@ -73,5 +76,6 @@ export function findPreset(id: string | undefined, custom: Preset[]): Preset | u
 export function describe(p: Preset): string {
   const fmt = (sec: number) =>
     sec % 60 === 0 ? `${sec / 60} min` : sec < 60 ? `${sec} s` : `${Math.floor(sec / 60)}:${(sec % 60).toString().padStart(2, '0')} min`;
-  return `${p.rounds} × ${fmt(p.roundSec)} · ${p.restSec > 0 ? `${fmt(p.restSec)} Pause` : 'ohne Pause'}`;
+  const group = rotationOf(p);
+  return `${p.rounds} × ${fmt(p.roundSec)} · ${p.restSec > 0 ? `${fmt(p.restSec)} Pause` : 'ohne Pause'}${group ? ` · ${group.length} Boxer` : ''}`;
 }

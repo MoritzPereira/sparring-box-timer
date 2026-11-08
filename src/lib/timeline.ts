@@ -5,6 +5,7 @@
  * daher driftet auch nach Pause, Sperrbildschirm oder App-Wechsel nichts.
  */
 import type { Preset } from './presets';
+import { pairingFor, pairingSpeech, pairingText, rotationOf } from './rotation';
 
 export type Phase = 'prep' | 'round' | 'rest';
 
@@ -29,33 +30,62 @@ export type Cue = {
   body: string;
 };
 
+/** Sprachansage der Paarungen (nur im Vordergrund, keine Mitteilung). */
+export type Announcement = { at: number; text: string };
+
 export type Timeline = {
   segments: Segment[];
   cues: Cue[];
+  announcements: Announcement[];
   total: number;
   rounds: number;
+  /** Teilnehmer der Sparring-Rotation, null = aus */
+  fighters: string[] | null;
 };
 
 const S = 1000;
+/** Ansage startet, wenn das Doppel-Klingeln der End-Glocke vorbei ist (Nachhall läuft noch). */
+const ANNOUNCE_AFTER_BELL_MS = 2500;
+
+/** Grobe Sprechdauer der Ansage (~13 Zeichen pro Sekunde), damit sie vor dem Rundenstart fertig ist. */
+function speechMs(text: string): number {
+  return (text.length / 13) * S;
+}
 
 export function buildTimeline(p: Preset): Timeline {
   const segments: Segment[] = [];
   const cues: Cue[] = [];
+  const announcements: Announcement[] = [];
+  const fighters = rotationOf(p);
+  const pairs = (round: number) => (fighters ? pairingText(pairingFor(fighters, round)) : null);
   let t = 0;
+
+  // Ansage der nächsten Paarungen direkt nach der Glocke. Sie hat Vorrang: Das kurze Klacken
+  // darf darüber klingen. Entfällt nur, wenn sie vor dem nächsten Rundenstart nicht fertig würde.
+  const addAnnouncement = (at: number, segEnd: number, nextRound: number) => {
+    if (!fighters) return;
+    const text = pairingSpeech(pairingFor(fighters, nextRound), nextRound);
+    if (segEnd - at >= speechMs(text) + 500) announcements.push({ at, text });
+  };
 
   // Hinweis genauso viele Sekunden vor Rundenstart wie vor Rundenende (Standard 10 s) –
   // nur wenn die Vorbereitung/Pause länger ist als der Hinweis, sonst gar nicht.
   const addGetReady = (segStart: number, segEnd: number, nextRound: number) => {
     if (p.warnSec <= 0) return;
     const at = segEnd - p.warnSec * S;
-    if (at - segStart >= 2 * S) {
-      cues.push({ kind: 'getReady', at, title: `Gleich Runde ${nextRound}/${p.rounds}`, body: `Noch ${p.warnSec} Sekunden` });
-    }
+    if (at - segStart < 2 * S) return;
+    cues.push({
+      kind: 'getReady',
+      at,
+      title: `Gleich Runde ${nextRound}/${p.rounds} – noch ${p.warnSec} s`,
+      body: pairs(nextRound) ?? 'Bereit machen',
+    });
   };
 
   if (p.prepSec > 0) {
     segments.push({ phase: 'prep', round: 1, start: t, end: t + p.prepSec * S });
     addGetReady(t, t + p.prepSec * S, 1);
+    addAnnouncement(t + 300, t + p.prepSec * S, 1);
     t += p.prepSec * S;
   }
 
@@ -63,7 +93,7 @@ export function buildTimeline(p: Preset): Timeline {
     const roundStart = t;
     const roundEnd = t + p.roundSec * S;
     segments.push({ phase: 'round', round: r, start: roundStart, end: roundEnd });
-    cues.push({ kind: 'roundStart', at: roundStart, title: `Runde ${r}/${p.rounds}`, body: 'Los geht’s!' });
+    cues.push({ kind: 'roundStart', at: roundStart, title: `Runde ${r}/${p.rounds}`, body: pairs(r) ?? 'Los geht’s!' });
 
     if (p.warnSec > 0 && p.warnSec < p.roundSec) {
       cues.push({
@@ -79,16 +109,23 @@ export function buildTimeline(p: Preset): Timeline {
     if (isLast) {
       cues.push({ kind: 'finish', at: t, title: 'Training beendet', body: `${p.rounds} Runden geschafft 💪` });
     } else if (p.restSec > 0) {
-      cues.push({ kind: 'roundEnd', at: t, title: `Runde ${r} vorbei – Pause`, body: `${formatClock(p.restSec * S)} Pause` });
+      const next = pairs(r + 1);
+      cues.push({
+        kind: 'roundEnd',
+        at: t,
+        title: `Runde ${r} vorbei – ${formatClock(p.restSec * S)} Pause`,
+        body: next ? `Nächste: ${next}` : `Gleich Runde ${r + 1}/${p.rounds}`,
+      });
       segments.push({ phase: 'rest', round: r, start: t, end: t + p.restSec * S });
       const restEnd = t + p.restSec * S;
       addGetReady(t, restEnd, r + 1);
+      addAnnouncement(t + ANNOUNCE_AFTER_BELL_MS, restEnd, r + 1);
       t = restEnd;
     }
   }
 
   cues.sort((a, b) => a.at - b.at);
-  return { segments, cues, total: t, rounds: p.rounds };
+  return { segments, cues, announcements, total: t, rounds: p.rounds, fighters };
 }
 
 export type Snapshot =

@@ -1,7 +1,7 @@
 # Box-Timer – Konzept
 
 > Stand: 31.10.2026 · Original: [konzept.pdf](konzept.pdf)
-> Umsetzungsstand v1.0.0 ist jeweils mit ✅ markiert.
+> Umsetzungsstand v1.0.0 ist jeweils mit ✅ markiert. Seit 07.11.2026: Sparring-Rotation als USP (siehe unten).
 
 ## Idee & Zielgruppe
 
@@ -14,6 +14,8 @@ Ein Box-Timer, der für Sparring zu zweit gebaut ist: aus drei Metern lesbar, mi
 - Werbung oder Paywall genau dann, wenn man starten will
 - Display geht aus, oder der Timer stoppt im Sperrbildschirm
 - Signalton geht unter, wenn nebenbei Musik läuft
+
+- In der Gruppe ständig die Frage: Wer ist dran, wer hatte schon Pause?
 
 **Zielgruppe:** Hobby-Boxer und Kampfsportler (Boxen, Kickboxen, MMA, Muay Thai), die mit Partner oder in kleinen Gruppen trainieren, sowie kleine Gyms ohne Rundenuhr an der Wand.
 
@@ -33,6 +35,7 @@ Version 1 kann genau eine Sache richtig gut: Runden zuverlässig takten.
 | Läuft im Hintergrund | Signale auch bei gesperrtem Handy | Zuverlässigkeit | ✅ ¹ |
 | Musik läuft weiter | Glocke wird über Spotify & Co. gelegt | Training mit Musik | ✅ |
 | Vibration | Haptik bei Rundenwechsel | Zusätzliches Signal | ✅ |
+| **Sparring-Rotation** | Teilnehmer eintragen, App teilt Paarungen und Pausen pro Runde ein, zeigt sie groß und sagt sie an | Niemand muss organisieren oder aufs Handy schauen | ✅ (nach v1.0) |
 
 ¹ Mit eigenem Glockenton erst im eigenen Build (in Expo Go: Standard-Mitteilungston).
 
@@ -48,7 +51,14 @@ Ablauf: Vorbereitung → Runde → Pause → Runde → … → Ende. Jeder Wechs
 
 ## USP
 
-Der Unterschied liegt nicht in mehr Features, sondern darin, dass die App für die Situation im Ring designt ist.
+**It-Piece: Sparring-Rotation – der Timer für Sparring-Gruppen.**
+Teilnehmer eintragen (z. B. Perry, Tobi, Micha, Kai, Jonas), die App berechnet, wer in welcher Runde gegen wen boxt. Bei ungerader Anzahl setzt jedes Mal ein anderer aus. In der Pause zeigt der Screen groß „Perry vs. Kai · Tobi vs. Jonas · Pause: Micha“, und eine Sprachansage nennt die Paarungen.
+
+- Das Problem kennt jeder, der in der Gruppe sparrt – und keine der großen Box-Timer-Apps löst es (die setzen auf Workouts, Kombis oder Watch).
+- Passt zum Kern der App: große Anzeige, nicht aufs Handy schauen müssen.
+- Lässt sich in einem Screenshot zeigen und ist gegenüber dem App Review ein klarer eigener Mehrwert (Guideline 4.3).
+
+Dazu die Basis – die App ist für die Situation im Ring designt:
 
 - **Handschuh-first:** Der ganze Bildschirm ist der Button. Keine Menüs während des Trainings.
 - **Lesbar auf Distanz:** Countdown füllt den Screen, Farbe zeigt den Status.
@@ -71,12 +81,12 @@ Dadurch braucht die App keinen Hintergrund-Audio-Modus, was das App-Review verei
 ## Später (v1.1+) & Monetarisierung
 
 - **Kombi-Ansagen:** Sprachausgabe ruft zufällige Schlagkombis („Jab, Cross, Hook“) für Pratzen- und Sandsacktraining.
-- **Sparring-Rotation:** Bei 3+ Leuten zeigt die App nach jeder Runde, wer gegen wen boxt.
+- **Rundentyp pro Runde:** Technik / locker / hart, passend zur Rotation.
 - **Live Activity:** Countdown im Sperrbildschirm und in der Dynamic Island.
 - **Apple Watch:** Vibration am Handgelenk bei Rundenwechsel.
 - **Android-Version:** Mit Expo fast ohne Mehraufwand.
 
-**Monetarisierung:** v1 kostenlos und werbefrei, um Bewertungen zu sammeln. Ab v1.1 Extra-Features (Kombi-Ansagen, Rotation, unbegrenzte Presets) als einmaliger Pro-Kauf, z. B. über RevenueCat.
+**Monetarisierung:** v1 kostenlos und werbefrei, um Bewertungen zu sammeln. Später Extra-Features (Kombi-Ansagen, Rundentypen, unbegrenzte Presets) als einmaliger Pro-Kauf, z. B. über RevenueCat.
 
 ## Fahrplan
 
@@ -86,6 +96,7 @@ Dadurch braucht die App keinen Hintergrund-Audio-Modus, was das App-Review verei
 | 2 | Projekt aufsetzen, Timer-Logik + Timer-Screen, Test mit Expo Go | ✅ |
 | 3 | Presets, Vorlagen und Speicherung | ✅ |
 | 4 | Sounds, Mitteilungen, Keep-Awake, Haptik – im echten Sparring testen | ✅ (Sparring-Test offen) |
+| 4b | Sparring-Rotation (USP) – mit Trainer/Gym-Leuten validieren | ✅ (Validierung offen) |
 | 5 | Icon, Screenshots, Store-Texte, Datenschutzseite | offen |
 | 6 | EAS Build → TestFlight → App Store Review | offen |
 

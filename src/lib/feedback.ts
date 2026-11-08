@@ -4,6 +4,7 @@
  */
 import { createAudioPlayer, setAudioModeAsync, type AudioPlayer } from 'expo-audio';
 import * as Haptics from 'expo-haptics';
+import * as Speech from 'expo-speech';
 import { Platform } from 'react-native';
 import type { CueKind } from './timeline';
 
@@ -61,6 +62,7 @@ export async function initAudio() {
     console.warn('Audio-Modus konnte nicht gesetzt werden', e);
   }
   for (const name of Object.keys(SOURCES) as SoundName[]) armed[name] = create(name);
+  loadVoice();
 }
 
 function play(name: SoundName) {
@@ -102,4 +104,61 @@ function vibrate(kind: CueKind) {
 export function tapFeedback() {
   if (Platform.OS === 'web') return;
   Haptics.selectionAsync().catch(() => {});
+}
+
+/*
+ * Sprachansage (Paarungen der Sparring-Rotation). Läuft wie die Glocke über die Musik.
+ * Stimme: bevorzugt „Anna“ (Deutsch) in der besten installierten Qualität
+ * (Premium > Erweitert > Standard). Fehlt Anna, die beste andere deutsche Stimme.
+ */
+const PREFERRED_VOICE = 'anna';
+let voiceId: string | undefined;
+let voiceQuality: 0 | 1 | 2 = 0; // 0 = Standard, 1 = Erweitert, 2 = Premium
+let voicePromise: Promise<void> | null = null;
+
+function qualityOf(v: Speech.Voice): 0 | 1 | 2 {
+  const id = v.identifier.toLowerCase();
+  if (id.includes('premium')) return 2;
+  if (id.includes('enhanced') || v.quality === Speech.VoiceQuality.Enhanced) return 1;
+  return 0;
+}
+
+function loadVoice(): Promise<void> {
+  voicePromise ??= (async () => {
+    try {
+      const voices = (await Speech.getAvailableVoicesAsync()).filter((v) => v.language?.toLowerCase().startsWith('de'));
+      const score = (v: Speech.Voice) =>
+        qualityOf(v) * 10 + (v.name.toLowerCase().startsWith(PREFERRED_VOICE) ? 5 : 0) + (v.language === 'de-DE' ? 1 : 0);
+      const best = voices.sort((a, b) => score(b) - score(a))[0];
+      if (best) {
+        voiceId = best.identifier;
+        voiceQuality = qualityOf(best);
+      }
+    } catch (e) {
+      console.warn('Stimmen konnten nicht geladen werden', e);
+    }
+  })();
+  return voicePromise;
+}
+
+/** true, wenn nur die einfache Standard-Stimme verfügbar ist (Hinweis zum Laden anzeigen). */
+export async function onlyBasicVoice(): Promise<boolean> {
+  if (Platform.OS === 'web') return false;
+  await loadVoice();
+  return voiceQuality === 0;
+}
+
+export function announce(text: string) {
+  try {
+    Speech.stop();
+    Speech.speak(text, { language: 'de-DE', voice: voiceId, rate: 0.95 });
+  } catch (e) {
+    console.warn('Ansage fehlgeschlagen', e);
+  }
+}
+
+export function stopAnnouncement() {
+  try {
+    Speech.stop();
+  } catch {}
 }

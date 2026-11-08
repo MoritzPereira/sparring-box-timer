@@ -2,8 +2,10 @@ import { router, Stack, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { Alert, KeyboardAvoidingView, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { FighterEditor } from '@/components/FighterEditor';
 import { Stepper } from '@/components/Stepper';
-import { findPreset, NEW_PRESET, usePresets } from '@/lib/presets';
+import { findPreset, NEW_PRESET, usePresets, type Preset } from '@/lib/presets';
+import { cleanFighters } from '@/lib/rotation';
 import { colors } from '@/lib/theme';
 import { buildTimeline, formatClock } from '@/lib/timeline';
 
@@ -21,7 +23,7 @@ export default function EditPreset() {
   const isTemplate = !!source?.builtIn;
   const isExisting = !!source && !isTemplate;
 
-  const [draft, setDraft] = useState(() =>
+  const [draft, setDraft] = useState<Omit<Preset, 'id'>>(() =>
     source ? { ...source, name: isTemplate ? `${source.name} (eigen)` : source.name } : { ...NEW_PRESET },
   );
   const set = <K extends keyof typeof draft>(key: K, v: (typeof draft)[K]) => setDraft((d) => ({ ...d, [key]: v }));
@@ -29,8 +31,8 @@ export default function EditPreset() {
   const total = buildTimeline({ ...draft, id: 'draft' }).total;
 
   const onSave = () => {
-    const { builtIn, ...rest } = draft as typeof draft & { builtIn?: boolean };
-    save({ ...rest, id: isExisting ? source!.id : undefined });
+    const { builtIn, ...rest } = draft;
+    save({ ...rest, fighters: cleanFighters(rest.fighters), id: isExisting ? source!.id : undefined });
     router.back();
   };
 
@@ -77,6 +79,13 @@ export default function EditPreset() {
         <Stepper label="Pause" value={draft.restSec} min={0} max={300} step={15} format={(v) => (v === 0 ? 'keine' : clock(v))} onChange={(v) => set('restSec', v)} />
         <Stepper label="Vorbereitung" value={draft.prepSec} min={0} max={60} step={5} format={seconds} onChange={(v) => set('prepSec', v)} />
         <Stepper label="Hinweis vor Rundenende/-start" value={draft.warnSec} min={0} max={60} step={5} format={seconds} onChange={(v) => set('warnSec', v)} />
+
+        <FighterEditor
+          fighters={draft.fighters ?? []}
+          rounds={draft.rounds}
+          onChange={(f) => set('fighters', f)}
+          onRounds={(r) => set('rounds', Math.min(30, r))}
+        />
 
         <Text style={styles.total}>Gesamtdauer: {formatClock(total)} min</Text>
 

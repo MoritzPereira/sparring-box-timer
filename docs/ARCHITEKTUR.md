@@ -7,7 +7,8 @@ Home (index.tsx) ──tap──▶ Timer (timer.tsx)
       │                        │
       └──✎──▶ Edit (edit.tsx)  ├─ buildTimeline()  → Segmente + Signale (timeline.ts)
                                ├─ scheduleCues()   → lokale Mitteilungen (notify.ts)
-                               └─ playCue()        → Sound + Vibration (feedback.ts)
+                               ├─ playCue()        → Sound + Vibration (feedback.ts)
+                               └─ pairingFor()     → Paarungen pro Runde (rotation.ts)
 ```
 
 Kein Backend, keine Netzwerkzugriffe. Eigene Presets liegen nur lokal in AsyncStorage (`box-timer-presets`).
@@ -35,6 +36,17 @@ Beispiel Amateur (3 × 3:00 / 1:00, Vorbereitung 10 s, Hinweis 10 s):
 4:10 roundStart   7:00 warn   7:10 roundEnd   8:00 getReady
 8:10 roundStart  11:00 warn  11:10 finish
 ```
+
+## Sparring-Rotation (`src/lib/rotation.ts`)
+
+- Aktiv, sobald ein Preset **mind. 3 Teilnehmer** hat (`fighters`, max. 12; leere/doppelte Namen werden entfernt).
+- **Kreis-Verfahren (Round-Robin):** Platz 1 bleibt fest, alle anderen rücken pro Runde eine Position weiter; gepaart wird von außen nach innen. Bei ungerader Anzahl belegt ein „Freilos“ den festen Platz – wer ihm gegenübersteht, hat Pause.
+- Ergebnis: Nach `n − 1` (gerade) bzw. `n` (ungerade) Runden hat jeder genau einmal gegen jeden geboxt und jeder genau einmal ausgesetzt, nie zweimal hintereinander. Bei mehr Runden beginnt der Zyklus von vorn.
+- `buildTimeline` nimmt die Paarungen in die Mitteilungstexte auf und legt **`announcements`** an: Sprachansage der nächsten Paarungen 0,3 s nach Beginn der Vorbereitung bzw. 2,5 s nach Pausenbeginn (nach dem Doppel-Klingeln). Die Ansage hat Vorrang – das kurze Klacken darf darüber klingen. Sie entfällt nur, wenn sie (geschätzt ~13 Zeichen/s) vor dem nächsten Rundenstart nicht fertig würde.
+- Die Ansage läuft über `expo-speech` im Vordergrund als ein fließender Satz („Runde 2: Perry gegen Kai, Tobi gegen Jonas – Micha hat Pause.“); bei Pause spricht sie zu Ende (und wird beim Weitermachen nicht wiederholt), beim Beenden wird sie abgebrochen.
+- **Lautsprecher-Knopf** oben rechts im Timer (nur bei aktiver Rotation): schaltet die Ansage an/aus, bricht eine laufende Ansage sofort ab. Die Einstellung bleibt gespeichert (`src/lib/settings.ts`, AsyncStorage `box-timer-settings`).
+- Stimme: bevorzugt **Anna** in der besten installierten Qualität (Premium > Erweitert > Standard), sonst die beste andere deutsche Stimme. Ist nur die Standard-Stimme da, zeigt der Editor einen Tipp, wo man Anna (Premium) lädt.
+- Timer-Screen: In Vorbereitung/Pause stehen die nächsten Paarungen groß unter der (kleineren) Uhr, während der Runde die aktuellen klein. Schriftgröße richtet sich nach Zeilenzahl und längster Paarung.
 
 ## Timer-Screen (`src/app/timer.tsx`)
 

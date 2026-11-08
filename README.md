@@ -1,6 +1,6 @@
 # Box-Timer
 
-**Rundentimer fürs Sparring – aus 3 m lesbar, mit Handschuhen bedienbar, Glocke über laufender Musik.**
+**Rundentimer für Sparring-Gruppen – weiß, wer gegen wen boxt. Aus 3 m lesbar, mit Handschuhen bedienbar, Glocke über laufender Musik.**
 
 ![Version](https://img.shields.io/badge/version-1.0.0-16A34A) ![Plattform](https://img.shields.io/badge/plattform-iOS-lightgrey) ![Expo SDK](https://img.shields.io/badge/Expo%20SDK-58-000020) ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6)
 
@@ -8,6 +8,7 @@
 
 ## Funktionen
 
+- **Sparring-Rotation:** Teilnehmer eintragen – die App teilt jede Runde ein, wer gegen wen boxt und wer aussetzt (jeder gegen jeden, faire Pausen). In der Pause groß auf dem Screen und per Sprachansage
 - **Presets & Vorlagen:** Amateur, Sparring, Profi, MMA – oder eigene Runden, Pausen, Vorbereitung
 - **Vollbild-Countdown** mit Farben: grün = Runde, orange = letzte 10 s, blau = Pause
 - **Handschuh-Modus:** irgendwo tippen = Pause/Weiter, halten = Beenden
@@ -17,7 +18,7 @@
 
 ## Tech-Stack
 
-Expo SDK 58 · React Native · TypeScript · Expo Router · Zustand · expo-audio · expo-notifications
+Expo SDK 58 · React Native · TypeScript · Expo Router · Zustand · expo-audio · expo-speech · expo-notifications
 
 ## Loslegen
 
