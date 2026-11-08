@@ -66,7 +66,7 @@ export async function scheduleCues(cues: Cue[], anchor: number, elapsed: number)
           title: c.title,
           body: c.body,
           sound: isExpoGo ? 'default' : `${CUE_SOUND[c.kind]}.wav`,
-          data: { boxTimer: true },
+          data: { sparringBoxTimer: true },
         },
         trigger: {
           type: Notifications.SchedulableTriggerInputTypes.DATE,

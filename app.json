@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "Sparring Box Timer",
-    "slug": "box-timer",
-    "scheme": "boxtimer",
+    "slug": "sparring-box-timer",
+    "scheme": "sparringboxtimer",
     "version": "1.1.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
@@ -10,14 +10,14 @@
     "backgroundColor": "#0B0F14",
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "de.moritzpereira.boxtimer",
+      "bundleIdentifier": "de.moritzpereira.sparringboxtimer",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
         "CFBundleDisplayName": "Sparring Timer"
       }
     },
     "android": {
-      "package": "de.moritzpereira.boxtimer",
+      "package": "de.moritzpereira.sparringboxtimer",
       "adaptiveIcon": {
         "backgroundColor": "#0B0F14",
         "foregroundImage": "./assets/android-icon-foreground.png",

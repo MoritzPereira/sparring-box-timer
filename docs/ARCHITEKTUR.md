@@ -11,7 +11,7 @@ Home (index.tsx) ──tap──▶ Timer (timer.tsx)
                                └─ pairingFor()     → Paarungen pro Runde (rotation.ts)
 ```
 
-Kein Backend, keine Netzwerkzugriffe. Eigene Presets liegen nur lokal in AsyncStorage (`box-timer-presets`).
+Kein Backend, keine Netzwerkzugriffe. Eigene Presets liegen nur lokal in AsyncStorage (`sparring-box-timer-presets`; Daten unter dem alten Präfix `box-timer-` werden beim ersten Start übernommen, siehe `src/lib/storage.ts`).
 
 ## Timer-Logik (`src/lib/timeline.ts`)
 
@@ -44,7 +44,7 @@ Beispiel Amateur (3 × 3:00 / 1:00, Vorbereitung 10 s, Hinweis 10 s):
 - Ergebnis: Nach `n − 1` (gerade) bzw. `n` (ungerade) Runden hat jeder genau einmal gegen jeden geboxt und jeder genau einmal ausgesetzt, nie zweimal hintereinander. Bei mehr Runden beginnt der Zyklus von vorn.
 - `buildTimeline` nimmt die Paarungen in die Mitteilungstexte auf und legt **`announcements`** an: Sprachansage der nächsten Paarungen 0,3 s nach Beginn der Vorbereitung bzw. 2,5 s nach Pausenbeginn (nach dem Doppel-Klingeln). Die Ansage hat Vorrang – das kurze Klacken darf darüber klingen. Sie entfällt nur, wenn sie (geschätzt ~13 Zeichen/s) vor dem nächsten Rundenstart nicht fertig würde.
 - Die Ansage läuft über `expo-speech` im Vordergrund als ein fließender Satz („Runde 2: Perry gegen Kai, Tobi gegen Jonas – Micha hat Pause.“); bei Pause spricht sie zu Ende (und wird beim Weitermachen nicht wiederholt), beim Beenden wird sie abgebrochen.
-- **Lautsprecher-Knopf** oben rechts im Timer (nur bei aktiver Rotation): schaltet die Ansage an/aus, bricht eine laufende Ansage sofort ab. Die Einstellung bleibt gespeichert (`src/lib/settings.ts`, AsyncStorage `box-timer-settings`).
+- **Lautsprecher-Knopf** oben rechts im Timer (nur bei aktiver Rotation): schaltet die Ansage an/aus, bricht eine laufende Ansage sofort ab. Die Einstellung bleibt gespeichert (`src/lib/settings.ts`, AsyncStorage `sparring-box-timer-settings`).
 - Stimme: bevorzugt **Anna** in der besten installierten Qualität (Premium > Erweitert > Standard), sonst die beste andere deutsche Stimme. Ist nur die Standard-Stimme da, zeigt der Editor einen Tipp, wo man Anna (Premium) lädt.
 - Timer-Screen: In Vorbereitung/Pause stehen die nächsten Paarungen groß unter der (kleineren) Uhr, während der Runde die aktuellen klein. Schriftgröße richtet sich nach Zeilenzahl und längster Paarung.
 
@@ -54,7 +54,7 @@ Beispiel Amateur (3 × 3:00 / 1:00, Vorbereitung 10 s, Hinweis 10 s):
 - **Tick (100 ms):** Prüft, welche Signale seit dem letzten Tick überschritten wurden, und spielt das jüngste – aber nur, wenn es weniger als 1,5 s alt ist (verpasste Signale, z. B. während das Handy gesperrt war, werden nicht nachgeholt; die hat die Mitteilung schon gespielt).
 - **Pause:** `anchor = null`, `pausedElapsed` merken, alle Mitteilungen löschen. **Weiter:** neuer Anker, Mitteilungen neu planen.
 - **Bedienung:** ganzer Bildschirm ist ein `Pressable`. Tippen = Pause/Weiter; 1,2 s halten = Beenden (weißer Fortschrittsbalken).
-- **Keep-Awake** mit Tag `box-timer`, solange der Screen offen ist.
+- **Keep-Awake** mit Tag `sparring-box-timer`, solange der Screen offen ist.
 
 ## Sound (`src/lib/feedback.ts`)
 

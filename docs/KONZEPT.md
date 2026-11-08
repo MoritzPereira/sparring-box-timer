@@ -5,7 +5,7 @@
 
 ## Idee & Zielgruppe
 
-Ein Box-Timer, der für Sparring zu zweit gebaut ist: aus drei Metern lesbar, mit Handschuhen bedienbar, mit einer Glocke, die man auch über Musik hört.
+Sparring Box Timer ist ein Rundentimer, der fürs Sparring gebaut ist: aus drei Metern lesbar, mit Handschuhen bedienbar, mit einer Glocke, die man auch über Musik hört.
 
 **Das Problem mit bestehenden Timer-Apps beim Sparring:**
 

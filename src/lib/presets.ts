@@ -1,7 +1,7 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 import { rotationOf } from './rotation';
+import { appStorage, STORAGE_PREFIX } from './storage';
 
 export type Preset = {
   id: string;
@@ -55,9 +55,9 @@ export const usePresets = create<PresetState>()(
       remove: (id) => set((s) => ({ custom: s.custom.filter((c) => c.id !== id) })),
     }),
     {
-      name: 'box-timer-presets',
+      name: `${STORAGE_PREFIX}presets`,
       version: 2,
-      storage: createJSONStorage(() => AsyncStorage),
+      storage: appStorage,
       // v2: Hinweis-Standard von 15 s auf 10 s gesenkt
       migrate: (state, version) => {
         const s = state as { custom: Preset[] };

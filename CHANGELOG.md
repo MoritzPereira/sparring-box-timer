@@ -1,11 +1,11 @@
 # Changelog
 
-Alle wesentlichen Änderungen am Sparring Timer (bis v1.0.0 „Box-Timer“). Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [SemVer](https://semver.org/lang/de/).
+Alle wesentlichen Änderungen am Sparring Box Timer (bis v1.0.0 „Box-Timer“). Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [SemVer](https://semver.org/lang/de/).
 
 ## [Unreleased]
 
 ### Geändert
-- Name jetzt **Sparring Box Timer** (auf dem Homescreen „Sparring Timer“)
+- Name jetzt **Sparring Box Timer** (auf dem Homescreen „Sparring Timer“), Repository, Website und Bundle-ID umbenannt (`sparring-box-timer`, `de.moritzpereira.sparringboxtimer`); gespeicherte Presets werden übernommen
 - Neues App-Icon: roter Boxhandschuh im rot-blauen Ring (rote und blaue Ecke)
 
 ## [1.1.0] – 2026-11-08
@@ -38,6 +38,6 @@ Erste vollständige Version des MVP aus dem [Konzept](docs/KONZEPT.md), auf dem 
 - Signale bei gesperrtem Handy über lokale Mitteilungen
 - Timer-Logik über vorausberechnete Zeitstempel (driftfrei)
 
-[Unreleased]: https://github.com/MoritzPereira/box-timer/compare/v1.1.0...HEAD
-[1.1.0]: https://github.com/MoritzPereira/box-timer/compare/v1.0.0...v1.1.0
-[1.0.0]: https://github.com/MoritzPereira/box-timer/releases/tag/v1.0.0
+[Unreleased]: https://github.com/MoritzPereira/sparring-box-timer/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/MoritzPereira/sparring-box-timer/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/MoritzPereira/sparring-box-timer/releases/tag/v1.0.0

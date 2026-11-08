@@ -25,8 +25,8 @@ Expo SDK 58 · React Native · TypeScript · Expo Router · Zustand · expo-audi
 Voraussetzungen: Node.js ≥ 20 und die App **Expo Go** auf dem iPhone.
 
 ```bash
-git clone https://github.com/MoritzPereira/box-timer.git
-cd box-timer
+git clone https://github.com/MoritzPereira/sparring-box-timer.git
+cd sparring-box-timer
 npm install
 npm start
 ```

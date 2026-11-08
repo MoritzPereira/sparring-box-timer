@@ -1,6 +1,6 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
+import { appStorage, STORAGE_PREFIX } from './storage';
 
 type SettingsState = {
   /** Sprachansage der Paarungen an/aus (Lautsprecher-Knopf im Timer). */
@@ -15,9 +15,9 @@ export const useSettings = create<SettingsState>()(
       toggleVoice: () => set((s) => ({ voiceOn: !s.voiceOn })),
     }),
     {
-      name: 'box-timer-settings',
+      name: `${STORAGE_PREFIX}settings`,
       version: 1,
-      storage: createJSONStorage(() => AsyncStorage),
+      storage: appStorage,
       partialize: (s) => ({ voiceOn: s.voiceOn }),
     },
   ),

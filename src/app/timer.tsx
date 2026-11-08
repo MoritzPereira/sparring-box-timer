@@ -17,7 +17,7 @@ const HOLD_TO_EXIT_MS = 1200;
 const START_DELAY_MS = 600; // kurz Luft holen, bevor der erste Gong kommt
 const STALE_CUE_MS = 1500; // ältere Signale (z. B. während gesperrt) nicht nachholen
 
-const KEEP_AWAKE_TAG = 'box-timer';
+const KEEP_AWAKE_TAG = 'sparring-box-timer';
 
 export default function TimerScreen() {
   // Display bleibt an, solange der Timer-Screen offen ist.
