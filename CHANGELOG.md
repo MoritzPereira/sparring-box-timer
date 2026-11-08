@@ -1,8 +1,14 @@
 # Changelog
 
-Alle wesentlichen Änderungen an Box-Timer. Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [SemVer](https://semver.org/lang/de/).
+Alle wesentlichen Änderungen am Sparring Timer (bis v1.0.0 „Box-Timer“). Format nach [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung nach [SemVer](https://semver.org/lang/de/).
 
 ## [Unreleased]
+
+## [1.1.0] – 2026-11-08
+
+### Geändert
+- Neuer Name **Sparring Timer** und neues App-Icon
+- Nur noch iPhone (kein iPad-Layout im Store)
 
 ### Neu: Sparring-Rotation
 - Teilnehmer pro Preset eintragen (3–12 Namen)
@@ -28,5 +34,6 @@ Erste vollständige Version des MVP aus dem [Konzept](docs/KONZEPT.md), auf dem 
 - Signale bei gesperrtem Handy über lokale Mitteilungen
 - Timer-Logik über vorausberechnete Zeitstempel (driftfrei)
 
-[Unreleased]: https://github.com/MoritzPereira/box-timer/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/MoritzPereira/box-timer/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/MoritzPereira/box-timer/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/MoritzPereira/box-timer/releases/tag/v1.0.0

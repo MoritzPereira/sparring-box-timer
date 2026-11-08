@@ -1,8 +1,8 @@
-# Box-Timer
+# Sparring Timer
 
-**Rundentimer für Sparring-Gruppen – weiß, wer gegen wen boxt. Aus 3 m lesbar, mit Handschuhen bedienbar, Glocke über laufender Musik.**
+**Rundentimer für Sparring-Gruppen (Boxen, MMA, Kickboxen, BJJ …) – weiß, wer gegen wen boxt. Aus 3 m lesbar, mit Handschuhen bedienbar, Glocke über laufender Musik.**
 
-![Version](https://img.shields.io/badge/version-1.0.0-16A34A) ![Plattform](https://img.shields.io/badge/plattform-iOS-lightgrey) ![Expo SDK](https://img.shields.io/badge/Expo%20SDK-58-000020) ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6)
+![Version](https://img.shields.io/badge/version-1.1.0-16A34A) ![Plattform](https://img.shields.io/badge/plattform-iOS-lightgrey) ![Expo SDK](https://img.shields.io/badge/Expo%20SDK-58-000020) ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6)
 
 📄 [Konzept](docs/KONZEPT.md) · 🛠 [Architektur](docs/ARCHITEKTUR.md) · 📝 [Changelog](CHANGELOG.md)
 

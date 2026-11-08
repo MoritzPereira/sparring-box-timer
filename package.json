@@ -1,8 +1,8 @@
 {
   "name": "box-timer",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
-  "description": "Rundentimer fürs Sparring – aus 3 m lesbar, mit Handschuhen bedienbar.",
+  "description": "Sparring Timer – Rundentimer mit Sparring-Rotation für Boxen, MMA, Kickboxen & Co.",
   "author": "Moritz Pereira",
   "license": "UNLICENSED",
   "main": "expo-router/entry",

@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "Box-Timer",
+    "name": "Sparring Timer",
     "slug": "box-timer",
     "scheme": "boxtimer",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
     "backgroundColor": "#0B0F14",
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "bundleIdentifier": "de.moritzpereira.boxtimer",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
