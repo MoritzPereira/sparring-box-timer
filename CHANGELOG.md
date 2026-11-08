@@ -4,6 +4,9 @@ Alle wesentlichen Änderungen am Sparring Timer (bis v1.0.0 „Box-Timer“). Fo
 
 ## [Unreleased]
 
+### Geändert
+- Name jetzt **Sparring Box Timer** (auf dem Homescreen „Sparring Timer“)
+
 ## [1.1.0] – 2026-11-08
 
 ### Geändert

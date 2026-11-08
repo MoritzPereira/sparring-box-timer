@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Sparring Timer",
+    "name": "Sparring Box Timer",
     "slug": "box-timer",
     "scheme": "boxtimer",
     "version": "1.1.0",
@@ -12,7 +12,8 @@
       "supportsTablet": false,
       "bundleIdentifier": "de.moritzpereira.boxtimer",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "CFBundleDisplayName": "Sparring Timer"
       }
     },
     "android": {

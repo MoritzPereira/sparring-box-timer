@@ -23,7 +23,7 @@ export default function RootLayout() {
           contentStyle: { backgroundColor: colors.bg },
         }}
       >
-        <Stack.Screen name="index" options={{ title: 'Sparring Timer', headerLargeTitle: true }} />
+        <Stack.Screen name="index" options={{ title: 'Sparring Box Timer', headerLargeTitle: true }} />
         <Stack.Screen name="edit" options={{ title: 'Preset', presentation: 'modal' }} />
         <Stack.Screen
           name="timer"

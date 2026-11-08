@@ -1,4 +1,4 @@
-# Sparring Timer – Konzept
+# Sparring Box Timer – Konzept
 
 > Stand: 31.10.2026 · Original: [konzept.pdf](konzept.pdf)
 > Umsetzungsstand v1.0.0 ist jeweils mit ✅ markiert. Seit 07.11.2026: Sparring-Rotation als USP (siehe unten).

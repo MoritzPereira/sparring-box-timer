@@ -1,4 +1,4 @@
-# Sparring Timer
+# Sparring Box Timer
 
 **Rundentimer für Sparring-Gruppen (Boxen, MMA, Kickboxen, BJJ …) – weiß, wer gegen wen boxt. Aus 3 m lesbar, mit Handschuhen bedienbar, Glocke über laufender Musik.**
 
