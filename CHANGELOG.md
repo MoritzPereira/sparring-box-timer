@@ -4,14 +4,11 @@ Alle wesentlichen Änderungen am Sparring Box Timer (bis v1.0.0 „Box-Timer“)
 
 ## [Unreleased]
 
-### Geändert
-- Name jetzt **Sparring Box Timer** (auf dem Homescreen „Sparring Timer“), Repository, Website und Bundle-ID umbenannt (`sparring-box-timer`, `de.moritzpereira.sparringboxtimer`); gespeicherte Presets werden übernommen
-- Neues App-Icon: roter Boxhandschuh im rot-blauen Ring (rote und blaue Ecke)
-
 ## [1.1.0] – 2026-11-08
 
 ### Geändert
-- Neuer Name **Sparring Timer** und neues App-Icon
+- Name jetzt **Sparring Box Timer** (auf dem Homescreen „Sparring Timer“), Repository, Website und Bundle-ID umbenannt (`sparring-box-timer`, `de.moritzpereira.sparringboxtimer`); gespeicherte Presets werden übernommen
+- Neues App-Icon: roter Boxhandschuh im rot-blauen Ring (rote und blaue Ecke)
 - Nur noch iPhone (kein iPad-Layout im Store)
 
 ### Neu: Sparring-Rotation
