@@ -6,6 +6,7 @@ Alle wesentlichen Änderungen am Sparring Timer (bis v1.0.0 „Box-Timer“). Fo
 
 ### Geändert
 - Name jetzt **Sparring Box Timer** (auf dem Homescreen „Sparring Timer“)
+- Neues App-Icon: roter Boxhandschuh im rot-blauen Ring (rote und blaue Ecke)
 
 ## [1.1.0] – 2026-11-08
 
