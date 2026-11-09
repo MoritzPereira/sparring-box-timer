@@ -1,4 +1,6 @@
-# Sparring Box Timer
+<p align="center"><img src="assets/icon.png" width="160" alt="Sparring Box Timer App-Icon"></p>
+
+<h1 align="center">Sparring Box Timer</h1>
 
 **Rundentimer für Sparring-Gruppen (Boxen, MMA, Kickboxen, BJJ …) – weiß, wer gegen wen boxt. Aus 3 m lesbar, mit Handschuhen bedienbar, Glocke über laufender Musik.**
 
